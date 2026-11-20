@@ -34,8 +34,8 @@ Last updated: 20 November 2026
 | P5-015 | Provision isolated MQTT test broker | BLOCKED | Person 2 coordinating |
 | P5-016 | Verify backend subscriber connectivity | BLOCKED | Actual broker test pending |
 | P5-017 | Verify SENSOR_001 occupancy processing | BLOCKED | First controlled test |
-| P5-018 | Verify three-reading stability rule | PENDING | Prepare offline test cases |
-| P5-019 | Verify abnormal sensor handling | PENDING | Prepare offline test cases |
+| P5-018 | Verify three-reading stability rule | DONE | Mocked tests cover three consecutive occupied and available readings |
+| P5-019 | Verify abnormal sensor handling | DONE | Mocked tests cover fault, blocked, unexpected, stale and offline handling |
 | P5-020 | Verify database occupancy updates | BLOCKED | Requires isolated environment |
 | P5-021 | Verify MQTT-to-WebSocket delivery | BLOCKED | Connected-client test pending |
 | P5-022 | Verify frontend live updates | BLOCKED | Depends on WebSocket delivery |
@@ -50,7 +50,7 @@ Last updated: 20 November 2026
 | P5-026 | Test session entry/exit integration | BLOCKED | Isolated environment required |
 | P5-027 | Test ticket creation/validation integration | BLOCKED | Isolated environment required |
 | P5-028 | Review navigation implementation | DONE | Code inspected |
-| P5-029 | Add dedicated navigation tests | PENDING | Mocked/offline tests |
+| P5-029 | Add dedicated navigation tests | DONE | Four mocked tests pass: shortest route, directed paths, invalid weights and incomplete metadata |
 | P5-030 | Verify actual navigation metrics | BLOCKED | Neo4j path values unverified |
 
 ## 4. Documentation and hardware
@@ -60,7 +60,7 @@ Last updated: 20 November 2026
 | P5-031 | Prepare test-case template | DONE | Person 5 documentation |
 | P5-032 | Prepare Arduino handoff checklist | DONE | UNO R3 |
 | P5-033 | Create integration issue tracker | DONE | This document |
-| P5-034 | Prepare consolidated test report | PENDING | Include verified results and blockers |
+| P5-034 | Prepare consolidated test report | DONE | Updated with backend offline test results and environment limitation |
 | P5-035 | Confirm exact sensor modules and wiring | DEFERRED | Await hardware details |
 | P5-036 | Implement UNO R3 serial-to-MQTT bridge | DEFERRED | Requires confirmed sensor protocol |
 | P5-037 | Verify physical sensor readings | DEFERRED | Hardware integration pending |
