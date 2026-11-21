@@ -1,28 +1,45 @@
 {
   "simulation_interval_seconds": 5,
+  "mqtt": {
+    "broker": "localhost",
+    "port": 1883,
+    "qos": 1
+  },
   "parking_lot": {
     "lot_id": "LOT_A",
     "slots": [
       {
-        "slot_id": "LOT_A_001",
+        "slot_id": "B1-A1",
         "sensor_id": "SENSOR_001"
       },
       {
-        "slot_id": "LOT_A_002",
+        "slot_id": "B1-A2",
         "sensor_id": "SENSOR_002"
       },
       {
-        "slot_id": "LOT_A_003",
+        "slot_id": "B1-A3",
         "sensor_id": "SENSOR_003"
       },
       {
-        "slot_id": "LOT_A_004",
+        "slot_id": "B2-A1",
         "sensor_id": "SENSOR_004"
       },
       {
-        "slot_id": "LOT_A_005",
+        "slot_id": "B2-A2",
         "sensor_id": "SENSOR_005"
+      },
+      {
+        "slot_id": "B2-A3",
+        "sensor_id": "SENSOR_006"
+      },
+      {
+        "slot_id": "B2-A4",
+        "sensor_id": "SENSOR_007"
       }
     ]
+  },
+  "entrance_sensor": {
+    "sensor_id": "SENSOR_008",
+    "topic": "spotsync/sensors/SENSOR_008/events"
   }
 }

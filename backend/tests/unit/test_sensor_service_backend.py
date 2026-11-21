@@ -227,3 +227,73 @@ def test_stale_sensor_broadcasts_changed_slot_after_commit(monkeypatch):
             "sensor_id": 7,
         }
     )
+
+
+def test_stable_occupancy_marks_slot_occupied(monkeypatch):
+    disable_incident_calls(monkeypatch)
+
+    sensor = SimpleNamespace(
+        id=1,
+        parking_lot_id=10,
+        parking_slot_id=20,
+        is_online=True,
+        last_seen_at=None,
+    )
+    slot = SimpleNamespace(
+        id=20, status="AVAILABLE", is_available=True
+    )
+
+    db = MagicMock()
+    db.get.side_effect = [sensor, slot]
+    db.scalars.return_value.all.return_value = [
+        "occupied", "occupied", "occupied"
+    ]
+
+    session_lookup = MagicMock()
+    monkeypatch.setattr(
+        "app.services.sensor_service.get_active_session_for_slot_for_update",
+        session_lookup,
+    )
+
+    sensor_service.process_event(
+        db=db,
+        sensor_id=1,
+        event_type="occupied",
+    )
+
+    assert slot.status == "OCCUPIED"
+    assert slot.is_available is False
+    session_lookup.assert_not_called()
+    db.commit.assert_called_once()
+
+
+@pytest.mark.parametrize("event_type", ["fault", "blocked", "unexpected"])
+def test_abnormal_events_do_not_change_slot_occupancy(
+    monkeypatch, event_type
+):
+    disable_incident_calls(monkeypatch)
+
+    sensor = SimpleNamespace(
+        id=1,
+        parking_lot_id=10,
+        parking_slot_id=20,
+        is_online=True,
+        last_seen_at=None,
+    )
+    slot = SimpleNamespace(
+        id=20, status="AVAILABLE", is_available=True
+    )
+
+    db = MagicMock()
+    db.get.side_effect = [sensor, slot]
+
+    sensor_service.process_event(
+        db=db,
+        sensor_id=1,
+        event_type=event_type,
+    )
+
+    assert slot.status == "AVAILABLE"
+    assert slot.is_available is True
+    db.scalars.assert_not_called()
+    db.commit.assert_called_once()
